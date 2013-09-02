@@ -102,13 +102,38 @@ module.exports = function (grunt) {
       }
     },
 
+    uglify: {
+      my_target: {
+        files: {
+          '<%= config.pub %>/js/appscripts.min.js': [
+            '<%= config.pub %>/js/**/*.js',
+            '!<%= config.pub %>/js/appscripts.min.js'
+          ]
+        }
+      }
+    },
+
+    concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        src: [
+          '<%= config.pub %>/js/**/*.js',
+          '<%= config.pub %>/js/*.js',
+          '!<%= config.pub %>/js/vendorscripts.min.js'
+        ],
+        dest: '<%= config.pub %>/js/vendorscripts.min.js'
+      }
+    },
+
 //    requirejs: {
 //      compile: {
 //        options: {
 //          baseUrl: "dist/scripts",
 //          name: "main",
-//          mainConfigFile: "dist/js/require.config.js",
-//          out: "dist/js/main.js"
+//          //mainConfigFile: "dist/js/require.config.js",
+//          out: "<%= config.pub %>/js/vendorscripts.min.js"
 //        }
 //      }
 //    },
@@ -123,6 +148,7 @@ module.exports = function (grunt) {
     usemin: {
       html: ['<%= config.views %>/{,*/}*.handlebars'],
       css: ['<%= config.pub %>/css/{,*/}*.css'],
+      //basedir: ['<%= config.pub %>'],
       //basedir: '<%= config.views %>',
       options: {
         dirs: ['<%= config.views %>']
@@ -259,6 +285,8 @@ module.exports = function (grunt) {
     //'htmlmin',
     //'copy',
     //'ngmin',
+    //'uglify',
+    'concat',
     //'requirejs',
     //'cdnify',
     //'rev',
