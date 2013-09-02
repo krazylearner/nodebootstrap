@@ -8,3 +8,6 @@ node_modules
 logs
 public/bower_components
 config/runtime.json
+public/css/minified.css
+public/js/minified.js
+views/*.handlebars

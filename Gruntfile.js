@@ -144,8 +144,10 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= config.pub %>/css/compiled.css': [
-            '<%= config.pub %>/css/{,*/}*.css'
+          '<%= config.pub %>/css/minified.css': [
+            '<%= config.pub %>/css/{,*/}*.css',
+            '<%= config.pub %>/bower_components/bootstrap/dist/css/bootstrap.min.css',
+            '!<%= config.pub %>/css/minified.css'
           ]
         }
       }
@@ -220,15 +222,10 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= config.pub %>',
-          dest: '<%= config.dist %>',
+          cwd: '<%= config.viewssrc %>',
+          dest: '<%= config.views %>',
           src: [
-            '*.{ico,txt}',
-            '.htaccess',
-            'components/**/*',
-            'images/{,*/}*.{gif,webp}',
-            'scripts/{,*/}*.js',
-            'scripts/**/**/*.*'
+            '**/*.handlebars'
           ]
         }]
       }
@@ -255,6 +252,7 @@ module.exports = function (grunt) {
     'clean:dist',
     //'jshint',
     //'test',
+    'copy',
     'useminPrepare',
     //'imagemin',
     'cssmin',
