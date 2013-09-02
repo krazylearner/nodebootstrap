@@ -17,34 +17,12 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= config.pub %>/js/vendorscripts.min.js'
+            '<%= config.pub %>/js/vendorscripts.min.js',
+            '<%= config.pub %>/css/minified.css',
+            '<%= config.views %>/*.handlebars',
+            '<%= config.views %>/**/*.handlebars'
           ]
         }]
-      },
-      server: '.tmp'
-    },
-
-    jshint: {
-      files: [
-        'Gruntfile.js',
-        '<%= config.pub %>/js/**/*.js'
-      ],
-
-      excludes: [],
-
-      directives: {
-        predef: [
-          'jQuery',
-          'module',
-          'angular',
-          'define',
-          'require'
-        ]
-      },
-
-      options: {
-        strict: false,
-        indent: 2
       }
     },
 
@@ -117,8 +95,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    //'jshint',
-    //'test',
     'copy',
     'useminPrepare',
     'cssmin',
@@ -127,6 +103,5 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
-  grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('default', ['build']);
 };
